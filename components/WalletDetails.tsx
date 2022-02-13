@@ -17,8 +17,7 @@ interface WalletDetailProps {
 interface DetailProps {
 	account: string | undefined,
 	chainId: number | undefined,
-	onClickDisconnect: MouseEventHandler<HTMLButtonElement>,
-	balance: string
+	balance: string | undefined
 }
 
 const styles = {
@@ -105,8 +104,8 @@ const WalletDetails: React.FC<WalletDetailProps> = ({ isOpen, toggle }) => {
 			<ModalHeader>Wallet details</ModalHeader>
 			<ModalBody>
 				{
-					isActive &&
-					<MemorizedDetailTable account={accounts?.[0]} balance={balances?.length > 0 && `Ξ${formatEther(balances[0])}`} chainId={chainId} onClickDisconnect={() => { }} />
+					isActive && balances &&
+					<MemorizedDetailTable account={accounts?.[0]} balance={balances?.length > 0 ? `Ξ${formatEther(balances[0])}` : ''} chainId={chainId} />
 				}
 				<Connect
 					connector={metaMask}
