@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Input from '../core-elements/Input'
@@ -9,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowRightArrowLeft
 } from '@fortawesome/free-solid-svg-icons'
+
+const WalletDetails = dynamic(() => import('../components/WalletDetails'), { ssr: false })
 
 const RATES = {
   NETP: 1,
@@ -68,6 +71,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
+      <WalletDetails isOpen={isOpen} toggle={toggle} />
     </div>
   )
 }
